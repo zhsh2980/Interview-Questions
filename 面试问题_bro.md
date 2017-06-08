@@ -237,9 +237,28 @@
 
 ### 屏幕适配
 
+[屏幕适配的前世今生](http://blog.csdn.net/lin_t_s/article/details/55271002)
+
+**百分比布局**
+
+- PercentRelativeLayout
+- PercentFrameLayout
+
+图片适配用.9图
+
+代码适配
+
 ### Crash捕获
 
+[Android如何捕获应用的crash信息](http://blog.csdn.net/fishle123/article/details/50823358)
+
+### Https
+
+[Android Https相关完全解析 当OkHttp遇到Https](http://blog.csdn.net/lmj623565791/article/details/48129405)
+
 ### Context 使用
+
+[Android Context 上下文 你必须知道的一切](http://blog.csdn.net/lmj623565791/article/details/40481055)
 
 ### 单例模式、观察者模式、工厂模式项目中使用情况
 
