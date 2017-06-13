@@ -190,12 +190,22 @@
 
         当ViewStub通过setVisibility或者inflate方法加载后，ViewStub就会被它内部的布局替换掉，ViewStub也就不再是整个布局结构的一部分了。
 
+   3. 优化工具：
+
+      1. Hierarchy Viewer ，是 Android SDK 自带的一款可视化调试工具，用来检查 Layout **嵌套**和**绘制**时间。
+      2. Android Lint 是 Android SDK Tools 中引入的代码检查工具，
+
 2. #### 绘制优化
 
    View的 onDraw 方法要避免执行大量的操作；
 
    1. onDraw 中不要创建大量的局部对象，因为 onDraw 方法会被频繁调用，这样就会在一瞬间产生大量的临时对象，不仅会占用过多内存还会导致系统频繁 GC，降低程序执行效率。
+
    2. onDraw 也不要做耗时的任务，也不能执行成千上万的循环操作，尽管每次循环都很轻量级，但大量循环依然十分抢占 CPU 的时间片，这会造成 View 的绘制过程不流畅。根据 Google 官方给出的标准，View 绘制保持在60fps是最佳的，这也就要求每帧的绘制时间不超过16ms(1000/60)；所以要尽量降低 onDraw 方法的复杂度。
+
+   3. 查看工具：
+
+      开发者选项 -> Show GPU Overdraw，打开后会有不同颜色的区域表示不同的过度绘制次数。
 
 3. #### 内存泄漏优化
 
@@ -204,16 +214,45 @@
 
    1. 静态变量导致的内存泄露
       比如Activity内，一静态Conext引用了当前Activity，所以当前Activity无法释放。或者一静态变量，内部持有了当前Activity，Activity在需要释放的时候依然无法释放。
+
    2. 单例模式导致的内存泄露
       比如单例模式持有了Activity，而且也没用解注册的操作。因为单例模式的生命周期和Application保存一致，生命周期比Activity要长，这样一来就导致Activity对象无法及时被释放。
+
    3. 属性动画导致的内存泄露
       属性动画中有一类无限循环的动画，如果在Activity播放了此类动画并且没有在onDestroy中去停止动画，那么动画会一直播放下去，并且这个时候Activity的View会被动画持有，而View又持有了Activity，最终导致Activity无法释放。解决办法是在 Activity 的 onDrstroy中调用animator.cancel()来停止动画。
+
+   4. Handler 临时性内存泄漏
+
+      **原因**：Message 发出之后存储在 MessageQueue 中，页面关闭时有些 Message 可能没有被立即处理到。在Message中存在一个 target ， 它是 Handler 的一个引用，Message 在 Queue 中存在的时间过长，就会导致 Handler 无法被回收。如果 Handler 是非静态的，就会导致 Activity 或者 Service 不被回收。
+
+      **解决**：
+
+      - 使用静态 handler 内部类，然后对 handler 持有的引用（this）采取软引用。
+
+      - 在 Activity 关闭的时候，移除消息。
+
+        ~~~java
+        mHandler.removeCallbacksAndMessages(null);
+        ~~~
 
 4. #### 线程优化
 
    线程优化的思想是采用线程池，避免程序存在大量的Thread。
 
 5. #### 省电优化
+
+   1. 屏幕：深色比浅色省电。
+   2. 网络：
+      - WiFi 比移动数据网络省电。尽量在 WiFi 下传输数据。
+      - WiFi 下增大每个包的大小。
+      - 移动数据下做到批量执行网络请求，避免频繁的间隔网络请求。
+      - JSON 比 XML 效率高。
+      - 压缩数据格式。
+   3. CPU：
+      - CPU 频率高费电，并不是利用率高费电。
+      - 减少浮点运算。
+      - 避免 wakelock（换型手机） 使用不当。
+      - 使用 job scheduler。不紧急的任务，耗电量大的任务，放到充电或者有 WiFi 的地方再执行。
 
 6. #### 响应速度优化和ANR日志分析
 
