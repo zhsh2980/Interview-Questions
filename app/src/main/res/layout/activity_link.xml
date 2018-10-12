@@ -2,23 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/bt_link_reversal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="单链表反转"
-        />
+        android:text="单链表反转" />
 
     <Button
         android:id="@+id/bt_has_ring"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="判断是否有环"
-        />
+        android:text="判断是否有环" />
 
+    <Button
+        android:id="@+id/bt_conbine_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="合并两个有序链表" />
 
 
 </LinearLayout>

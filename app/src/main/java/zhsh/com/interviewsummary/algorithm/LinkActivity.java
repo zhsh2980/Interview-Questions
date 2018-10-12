@@ -15,6 +15,7 @@ public class LinkActivity extends BaseActivity {
 
     private Button bt_link_reversal;
     private Button bt_has_ring;
+    private Button bt_conbine_list;
 
     @Override
     protected int setContentViewId() {
@@ -26,6 +27,7 @@ public class LinkActivity extends BaseActivity {
 
         bt_link_reversal = findViewById(R.id.bt_link_reversal);
         bt_has_ring = findViewById(R.id.bt_has_ring);
+        bt_conbine_list = findViewById(R.id.bt_conbine_list);
 
     }
 
@@ -38,8 +40,67 @@ public class LinkActivity extends BaseActivity {
     protected void initListener() {
         bt_link_reversal.setOnClickListener((v) -> startReversal());
         bt_has_ring.setOnClickListener((v)-> whetherRing());
+        bt_conbine_list.setOnClickListener((v)-> conbineList());
 
 
+    }
+
+    /**
+     * 合并两个有序链表
+     * 假设为 1->3->5
+     *       2->4->6
+     *  则首先判断1跟2的值大的做表头,在将1.next->max( 2, 3)大的值,递归调用即可
+     */
+    private void conbineList() {
+
+        Node node1 = new Node(1);
+        Node node3 = new Node(3);
+        Node node5 = new Node(5);
+
+        node1.setNext(node3);
+        node3.setNext(node5);
+
+        Node node2 = new Node(2);
+        Node node4 = new Node(4);
+        Node node6 = new Node(6);
+
+        node2.setNext(node4);
+        node4.setNext(node6);
+
+        Node h = startConbinedList(node1, node2);
+        //反转之前的数据
+        while (h != null) {
+            System.out.println("合并之后的数据为:" + h.getData());
+            h = h.getNext();
+        }
+    }
+
+    /**
+     * 使用递归调排序两个有序列表并将排序好的链表头返回
+     * @param node1 第一个链表头
+     * @param node2 第二个链表头
+     * @return 返回排序好的链表头,只能是node1或者node2中最小的值
+     */
+    private Node startConbinedList(Node node1, Node node2) {
+
+        //判空操作
+        if (node1 == null){
+            return node2;
+        }
+
+        if (node2 == null){
+            return node1;
+        }
+
+        if (node1.getData() < node2.getData()){
+            //将1的下一个指针指向min(2,3)最小的一个值
+            node1.setNext(startConbinedList(node1.getNext() , node2));
+            return node1; //最终返回的是链表的总头
+        }else{
+
+            node2.setNext(startConbinedList(node1 , node2.getNext()));
+            return node2; //最终返回的是链表的总头
+        }
     }
 
     /**
