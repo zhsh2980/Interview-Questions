@@ -5,18 +5,30 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/bt_link_reversal"
+        android:id="@+id/bt_bubble_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="单链表反转" />
+        android:text="冒泡排序" />
 
     <Button
-        android:id="@+id/bt_has_ring"
+        android:id="@+id/bt_insert_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="判断是否有环" />
+        android:text="插入排序" />
 
     <Button
+        android:id="@+id/bt_merger_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="归并排序" />
+
+    <Button
+        android:id="@+id/bt_quick_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速排序" />
+
+   <!-- <Button
         android:id="@+id/bt_conbine_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,12 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="删除倒数第n个数据" />
-
-    <Button
-        android:id="@+id/bt_hash_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hash值的判断" />
-
+-->
 
 </LinearLayout>

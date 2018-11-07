@@ -6,6 +6,7 @@ import android.widget.Button;
 import zhsh.com.interviewsummary.R;
 import zhsh.com.interviewsummary.activity.BaseActivity;
 import zhsh.com.interviewsummary.data.Node;
+import zhsh.com.interviewsummary.hash.HashSetManage;
 
 /**
  * 链表算法的面试题
@@ -17,6 +18,7 @@ public class LinkActivity extends BaseActivity {
     private Button bt_has_ring;
     private Button bt_conbine_list;
     private Button bt_delete_data;
+    private Button bt_hash_data;
 
     @Override
     protected int setContentViewId() {
@@ -30,6 +32,7 @@ public class LinkActivity extends BaseActivity {
         bt_has_ring = findViewById(R.id.bt_has_ring);
         bt_conbine_list = findViewById(R.id.bt_conbine_list);
         bt_delete_data = findViewById(R.id.bt_delete_data);
+        bt_hash_data = findViewById(R.id.bt_hash_data);
 
     }
 
@@ -44,6 +47,17 @@ public class LinkActivity extends BaseActivity {
         bt_has_ring.setOnClickListener((v)-> whetherRing());
         bt_conbine_list.setOnClickListener((v)-> conbineList());
         bt_delete_data.setOnClickListener((v)-> deleteLastNdata());
+        bt_hash_data.setOnClickListener((v)-> hashData());
+
+
+    }
+
+    /**
+     * 查看hashSet中更改至Hash是否一致
+     */
+    private void hashData() {
+
+        HashSetManage.setHashSet();
 
 
     }
@@ -214,8 +228,7 @@ public class LinkActivity extends BaseActivity {
      * 所以 L = R - i ; 而首次进入圈相遇的位置为 i ,整个圈长为 R ,
      * 所以当首次相遇的时候,重新以1为步长,一个以相交点为起始,一个以首节点开始,首次相遇点即为环的起始点;
      *
-     */
-    private void whetherRing() {
+*/    private void whetherRing() {
 
         Node head = new Node(0);
         Node head1 = new Node(1);

@@ -11,10 +11,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="链表"
-
             />
 
+    <Button
+        android:id="@+id/bt_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="排序" />
 
-    </LinearLayout>
+
+</LinearLayout>
 
 

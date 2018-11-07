@@ -1,16 +1,10 @@
 package zhsh.com.interviewsummary.activity;
 
-
-import android.view.View;
-import android.widget.Button;
-
 import zhsh.com.interviewsummary.R;
+import zhsh.com.interviewsummary.algorithm.ArrayActivity;
 import zhsh.com.interviewsummary.algorithm.LinkActivity;
 
 public class MainActivity extends BaseActivity {
-
-
-    private Button bt_link;
 
     @Override
     protected int setContentViewId() {
@@ -20,7 +14,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        bt_link = findViewById(R.id.bt_link);
+        findViewById(R.id.bt_link).setOnClickListener((v)->startActivity(LinkActivity.class));
+        findViewById(R.id.bt_sort).setOnClickListener((v)->startActivity(ArrayActivity.class));
 
     }
 
@@ -32,8 +27,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
-        bt_link.setOnClickListener((v)->startActivity(LinkActivity.class));
 
     }
 }
