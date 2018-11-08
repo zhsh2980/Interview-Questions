@@ -29,6 +29,17 @@ public class QuickSortManage {
      * @return 返回数组最后一位排序后所在数组位置的下标值
      */
     private static int partition(int[] a, int p, int r) {
+
+        //获取p ,r的中位数取其中的中间值作为分区点
+        int q = (p + r) / 2 ;
+        //得到三个值的中位数,然后给末尾交换
+        int inter = p < q ? (q < r ? q : p < r ? r : p) : (q > r ? q : p > r ? r : p);
+        if (inter != r){ //交换q跟r
+            a[inter] = a[inter] ^ a[r]; //一个数异或两次还是本身 x = x ^ y ^ y ;
+            a[r] = a[inter] ^ a[r];
+            a[inter] = a[inter] ^ a[r];
+        }
+
         int pivot = a[r]; //将最后一位作为分区点
         int i = p;
         for(int j = p; j < r; j++) {

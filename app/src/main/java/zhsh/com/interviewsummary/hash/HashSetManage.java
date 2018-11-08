@@ -27,9 +27,7 @@ public class HashSetManage {
         int after = person3.hashCode();
         set.add(person3);
 
-       Object obj =  person3;
-
-        System.out.println("per:" + per + "after:" +after + "obj:" +  obj.hashCode() + "size():" + set.size());
+        System.out.println("per:" + per + "after:" +after  + "size():" + set.size());
 
 
 

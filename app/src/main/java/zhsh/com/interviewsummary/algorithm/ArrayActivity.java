@@ -28,7 +28,7 @@ public class ArrayActivity extends BaseActivity{
     }
 
     private void quickSort() {
-        int [] arr = new int[]{1,4,3,5,2,7,9,8};
+        int [] arr = new int[]{9,4,3,5,2,7,1,8};
         int n = arr.length;
 
         QuickSortManage.quickSort(arr , n);
