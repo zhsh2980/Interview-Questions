@@ -6,6 +6,8 @@ import zhsh.com.interviewsummary.algorithm.LinkActivity;
 
 public class MainActivity extends BaseActivity {
 
+
+
     @Override
     protected int setContentViewId() {
         return R.layout.activity_main;

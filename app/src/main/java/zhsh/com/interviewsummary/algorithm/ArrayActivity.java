@@ -4,6 +4,7 @@ import zhsh.com.interviewsummary.R;
 import zhsh.com.interviewsummary.activity.BaseActivity;
 import zhsh.com.interviewsummary.manager.MergerSortManage;
 import zhsh.com.interviewsummary.manager.QuickSortManage;
+import zhsh.com.interviewsummary.singleton.TransfersingleTon;
 
 /**
  * 排序算法
@@ -123,11 +124,9 @@ public class ArrayActivity extends BaseActivity{
     }
 
 
-
-
-
     @Override
     protected void initDate() {
-
+        System.out.println(TransfersingleTon.getName());
+//        TransfersingleTon.getInstance();
     }
 }
