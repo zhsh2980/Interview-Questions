@@ -5,21 +5,26 @@ import android.widget.Button;
 
 import zhsh.com.interviewsummary.R;
 import zhsh.com.interviewsummary.activity.BaseActivity;
+import zhsh.com.interviewsummary.contract.LinkActyContract;
+import zhsh.com.interviewsummary.data.DoubleNode;
 import zhsh.com.interviewsummary.data.Node;
 import zhsh.com.interviewsummary.hash.HashSetManage;
+import zhsh.com.interviewsummary.presenter.LinkActyPresenter;
 
 /**
  * 链表算法的面试题
  * created by shi on 2018/10/11/011
  */
-public class LinkActivity extends BaseActivity {
+public class LinkActivity extends BaseActivity implements LinkActyContract.View{
 
     private Button bt_link_reversal;
     private Button bt_has_ring;
     private Button bt_conbine_list;
     private Button bt_delete_data;
+    private Button bt_delete_double_data;
     private Button bt_hash_data;
 
+    private LinkActyContract.Presenter presenter ;
     @Override
     protected int setContentViewId() {
         return R.layout.activity_link;
@@ -28,10 +33,12 @@ public class LinkActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        presenter = new LinkActyPresenter(this);
         bt_link_reversal = findViewById(R.id.bt_link_reversal);
         bt_has_ring = findViewById(R.id.bt_has_ring);
         bt_conbine_list = findViewById(R.id.bt_conbine_list);
         bt_delete_data = findViewById(R.id.bt_delete_data);
+        bt_delete_double_data = findViewById(R.id.bt_delete_double_data);
         bt_hash_data = findViewById(R.id.bt_hash_data);
 
     }
@@ -47,6 +54,7 @@ public class LinkActivity extends BaseActivity {
         bt_has_ring.setOnClickListener((v)-> whetherRing());
         bt_conbine_list.setOnClickListener((v)-> conbineList());
         bt_delete_data.setOnClickListener((v)-> deleteLastNdata());
+        bt_delete_double_data.setOnClickListener((v)-> deleteDoubleLastNdata());
         bt_hash_data.setOnClickListener((v)-> hashData());
 
 
@@ -155,12 +163,61 @@ public class LinkActivity extends BaseActivity {
         return per ;
     }
 
+
     /**
-     * 合并两个有序链表
-     * 假设为 1->3->5
-     *       2->4->6
-     *  则首先判断1跟2的值大的做表头,在将1.next->min( 2, 3)大的值,递归调用即可
+     * 删除倒数第n个数据,思路:当然可以首先遍历数据拿到长度计算倒数n的位置,然后在遍历到相对应的位置需要时间复杂度为O(n*2)->O(n)
+     * but有没有更好的方法,只需要1遍就能够找到:
+     * 第一次从k开始计数,每次走一步k-- , 遍历结束,判断k的值,如果k > 0,长度不够,不存在,如果k== 0,则首位为需要删除的对象,如果k < 0 ,则
+     * 第二次遍历,每次 k++ ,当k = 0时即为需要删除节点的前置节点;
      */
+    private void deleteDoubleLastNdata() {
+
+        DoubleNode node1 = new DoubleNode(1);
+        DoubleNode node2 = new DoubleNode(2);
+        DoubleNode node3 = new DoubleNode(3);
+        DoubleNode node4 = new DoubleNode(4);
+        DoubleNode node5 = new DoubleNode(5);
+        DoubleNode node6 = new DoubleNode(6);
+
+        //设置后置节点
+        node1.setNext(node2);
+        node2.setNext(node3);
+        node3.setNext(node4);
+        node4.setNext(node5);
+        node5.setNext(node6);
+        //设置前置节点
+        node2.setPre(node1);
+        node3.setPre(node2);
+        node4.setPre(node3);
+        node5.setPre(node4);
+        node6.setPre(node5);
+
+        int n = 1;
+        DoubleNode node = presenter.deleteDoubleNode(node1 , n);
+        if (node == null){
+            //返回的
+            System.out.println("没有合适的删除位置");
+        }else{
+
+            while (node != null){
+                System.out.println("当期的位置数据为:" + node.getData());
+                if (node.getPre() != null){
+                    System.out.println("当期的前置位置数据为:" + node.getPre().getData());
+                }
+                node = node.getNext();
+            }
+        }
+
+    }
+
+
+
+        /**
+         * 合并两个有序链表
+         * 假设为 1->3->5
+         *       2->4->6
+         *  则首先判断1跟2的值大的做表头,在将1.next->min( 2, 3)大的值,递归调用即可
+         */
     private void conbineList() {
 
         Node node1 = new Node(1);

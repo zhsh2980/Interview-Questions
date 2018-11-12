@@ -26,7 +26,13 @@
         android:id="@+id/bt_delete_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="删除倒数第n个数据" />
+        android:text="删除单链表倒数第n个数据" />
+
+    <Button
+        android:id="@+id/bt_delete_double_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除双向链表倒数第n个数据" />
 
     <Button
         android:id="@+id/bt_hash_data"
