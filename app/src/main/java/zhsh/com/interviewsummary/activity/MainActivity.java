@@ -3,6 +3,7 @@ package zhsh.com.interviewsummary.activity;
 import zhsh.com.interviewsummary.R;
 import zhsh.com.interviewsummary.algorithm.ArrayActivity;
 import zhsh.com.interviewsummary.algorithm.LinkActivity;
+import zhsh.com.interviewsummary.manager.TestServer;
 
 public class MainActivity extends BaseActivity {
 
@@ -23,6 +24,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initDate() {
+
+        TestServer.start(this , TestServer.ACTION_UPLOAD_DATA);
 
     }
 

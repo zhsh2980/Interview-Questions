@@ -20,6 +20,8 @@
         <activity android:name=".algorithm.LinkActivity"/>
         <activity android:name=".algorithm.ArrayActivity"/>
 
+        <service android:name=".manager.TestServer"/>
+
     </application>
 
 </manifest>
